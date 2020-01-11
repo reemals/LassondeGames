@@ -77,7 +77,7 @@ def moveToStation1():
                 print(2)
 
                 mats.asteroid(map)
-        elif ini["mapData"]["Mars"]["x"] != ini["location"]["x"]:
+        elif ini["mapData"]["Station1"]["x"] != ini["location"]["x"]:
             if map[ini["location"]["x"] + 1, ini["location"]["y"]] != -100:
                 print(3)
 
@@ -116,23 +116,56 @@ def moveToStation1():
     request.finish()
 
 
-# def moveToStation2():
-#     while (ini["location"]["x"] != ini["mapData"]["Station2"]["x"] or ini["location"]["y"] !=
-#            ini["mapData"]["Station2"]["y"]):
-#         if (ini["location"]["y"] != ini["mapData"]["Station2"]["y"]):
-#             if map[ini["location"]["x"], ini["location"]["y"] + 1] != -100:
-#                 request.turn("N")
-#                 request.move(1)
-#             else:
-#                 mats.isAsteroid(map)
-#
-#         elif ini["mapData"]["Mars"]["x"] != ini["mapData"]["Station22"]["x"]:
-#             if map[ini["location"]["x"] + 1, ini["location"]["y"]] != -100:
-#                 request.turn("E")
-#                 request.move(1)
-#             else:
-#                 request.turn("E")
-#                 mats.isAsteroid(map)
+def moveToStation2():
+    ini = request.getData()
+    while (ini["location"]["x"] != ini["mapData"]["Station2"]["x"] or ini["location"]["y"] != ini["mapData"]["Station2"]["y"]):
+        ini = request.getData()
+        if (ini["location"]["y"] != ini["mapData"]["Station2"]["y"]):
+            if map[ini["location"]["x"], ini["location"]["y"] + 1] != -100:
+                print(1)
+                request.turn("N")
+                request.move(1)
+            else:
+                print(2)
+
+                mats.asteroid(map)
+        elif ini["mapData"]["Station2"]["x"] != ini["location"]["x"]:
+            if map[ini["location"]["x"] + 1, ini["location"]["y"]] != -100:
+                print(3)
+
+                request.turn("E")
+                request.move(1)
+            else:
+                print(4)
+                request.turn("E")
+                mats.asteroid(map)
+
+    request.refuel()
+
+    ini = request.getData()
+    while (ini["location"]["x"] != ini["mapData"]["Mars"]["x"] or ini["location"]["y"] != ini["mapData"]["Mars"]["y"]):
+        ini = request.getData()
+        if (ini["location"]["y"] != ini["mapData"]["Mars"]["y"]):
+            if map[ini["location"]["x"], ini["location"]["y"] + 1] != -100:
+                print(1)
+                request.turn("N")
+                request.move(1)
+            else:
+                print(2)
+
+                mats.asteroid(map)
+        elif ini["mapData"]["Mars"]["x"] != ini["location"]["x"]:
+            if map[ini["location"]["x"] + 1, ini["location"]["y"]] != -100:
+                print(3)
+
+                request.turn("E")
+                request.move(1)
+            else:
+                print(4)
+
+                request.turn("E")
+                mats.asteroid(map)
+    request.finish()
 
 pathChosen = 0
 
@@ -160,9 +193,9 @@ if pathToStation2 > 30 or pathfromoStation2ToMars > 30:
 
 print("pathChosen: " + str(pathChosen))
 
-# if pathChosen == 1:
-#     moveToMars()
-# elif pathChosen == 2:
-moveToStation1()
-# else:
-#     moveToStation2()
+if pathChosen == 1:
+    moveToMars()
+elif pathChosen == 3:
+    moveToStation1()
+else:
+    moveToStation2()
