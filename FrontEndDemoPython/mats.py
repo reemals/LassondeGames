@@ -39,6 +39,7 @@ def mat(ourPos=0, MarsPos=100, StatPosFar=50, StatPosNear=50, AsPos=-100):
 	return mapMatrix
 
 def isAsteroid():
+	"""Check if the thing directly ahead is an asteroid."""
 	ini = request.getData()
 	direction = ini['direction']
 	if direction is 'N':
@@ -61,6 +62,7 @@ def isAsteroid():
 		return False
 
 def asteroid(mapMatrix):
+	"""Steer around an asteroid using the map matrix."""
 	ini = request.getData()
 	#otherWay = False
 	direction = ini['direction']
